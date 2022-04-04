@@ -6,30 +6,23 @@ spring:
     url: jdbc:postgresql://localhost:5432/temp_db
     username: postgres
     password: postgres
-#  cloud:
-#    stream:
-#      bindings:
-#        stock-out-0:
-#          destination: test_1pc_be
-#          producer:
-#            auto-startup: true
-#      kafka:
-#        binder:
-#          transaction:
-#            transaction-id-prefix: tx-
-##          producer-properties:
-##            transactional.id: test
-##            enable.idempotence: true
+  cloud:
+    stream:
+      bindings:
+        stock-out-0:
+          destination: test_1pc_be
+      kafka:
+        binder:
+          transaction:
+            producer:
+              configuration:
+                enable.idempotence: true
+                acks: all
+            transaction-id-prefix: tx-
   kafka:
     producer:
-      transaction-id-prefix: tx-
-#      properties:
-#        transactional.id: test
-#        enable.idempotence: true
-    bootstrap-servers: localhost:9092
-#    properties:
-#      transactional.id: test
-#      security.protocol: PLAINTEXT
+      bootstrap-servers: localhost:9092
+      security.protocol: PLAINTEXT
 management:
   endpoints:
     web:

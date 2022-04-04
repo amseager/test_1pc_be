@@ -1,7 +1,7 @@
 package com.example.test_1pc_be;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,9 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MyService {
 
   private final TempRepository tempRepository;
-  //private final StreamBridge streamBridge;
-  private final KafkaTemplate<String, String> kafkaTemplate;
-  //private final DataSourceTransactionManager dataSourceTransactionManager;
+  private final StreamBridge streamBridge;
 
   @Transactional(transactionManager = "transactionManager")
   public Temp getTemp() {
@@ -20,14 +18,13 @@ public class MyService {
     temp.setName("test");
     final Temp saved = tempRepository.save(temp);
 
-    //streamBridge.send("stock-out-0", temp);
-    kafkaTemplate.send("test_1pc_be", temp.toString());
+    streamBridge.send("stock-out-0", temp);
 
     System.out.println(saved);
 
-    if (true) {
-      throw new RuntimeException();
-    }
+    //if (true) {
+      //throw new RuntimeException();
+    //}
     return temp;
   }
 }

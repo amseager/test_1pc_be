@@ -10,11 +10,4 @@ public class Test1pcBeApplication {
     SpringApplication.run(Test1pcBeApplication.class, args);
   }
 
-  //@Bean
-  //public PlatformTransactionManager kafkaTransactionManager(BinderFactory binders) {
-  //  ProducerFactory<byte[], byte[]> pf = ((KafkaMessageChannelBinder) binders.getBinder(null,
-  //      MessageChannel.class)).getTransactionalProducerFactory();
-  //  return new KafkaTransactionManager<>(pf);
-  //}
-
 }
