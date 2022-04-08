@@ -12,7 +12,7 @@ public class MyService {
   private final TempRepository tempRepository;
   private final StreamBridge streamBridge;
 
-  @Transactional(transactionManager = "transactionManager")
+  @Transactional
   public Temp getTemp() {
     final Temp temp = new Temp();
     temp.setName("test");
@@ -23,7 +23,7 @@ public class MyService {
     System.out.println(saved);
 
     //if (true) {
-      //throw new RuntimeException();
+    //  throw new RuntimeException();
     //}
     return temp;
   }

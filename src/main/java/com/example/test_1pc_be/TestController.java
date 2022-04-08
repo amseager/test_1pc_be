@@ -12,7 +12,6 @@ public class TestController {
   private final MyService myService;
 
 
-  //@Transactional("kafkaTransactionManager")
   @GetMapping("/")
   public Temp test() {
     final Temp saved = myService.getTemp();
